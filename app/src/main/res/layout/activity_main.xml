@@ -11,6 +11,7 @@
         xmlns:tools="http://schemas.android.com/tools">
         <!-- A CardView that contains a TextView -->
         <TableLayout
+            android:id="@+id/tableLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <androidx.cardview.widget.CardView
@@ -18,7 +19,8 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardCornerRadius="4dp"
+            android:visibility="invisible">
 
             <TextView
                 android:text="Siemens Card"
@@ -33,13 +35,14 @@
                 android:layout_gravity="center"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                card_view:cardCornerRadius="4dp">
+                card_view:cardCornerRadius="4dp"
+                android:visibility="invisible">
 
                 <TextView
                     android:id="@+id/info_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Siemens Card"/>
+                    android:text="Shuttle Card"/>
             </androidx.cardview.widget.CardView>
 
         </TableLayout>
