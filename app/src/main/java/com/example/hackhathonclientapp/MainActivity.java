@@ -35,25 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnConnect = findViewById(R.id.btnAddCard);
-        btnConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvMessages.setText("");
-            }
-        });
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //String message = etMessage.getText().toString().trim();
-                //if (!message.isEmpty()) {
-                //   new Thread(new WriteMessageToOutputStream(message)).start();
-                //}
-                Card card = new Card(UUID.randomUUID().toString());
-                String cardRequest = card.GetRequest(Card.RequestTypes.AddCardRequest,card);
-                new Thread(new WriteMessageToOutputStream(cardRequest)).start();
 
-            }
-        });
+
     }
 
     private PrintWriter output;
