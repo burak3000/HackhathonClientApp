@@ -52,16 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cardTypeSpinner.setAdapter(adapter);
-//        btnConnect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                tvMessages.setText("");
-//                SERVER_IP = SERVER_IP;
-//                SERVER_PORT = SERVER_PORT;
-//                Thread1 = new Thread(new ConnectingThread());
-//                Thread1.start();
-//            }
-//        });
+
         btnAddCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,14 +61,16 @@ public class MainActivity extends AppCompatActivity {
                 //   new Thread(new WriteMessageToOutputStream(message)).start();
                 //}
                 if (cardTypeSpinner.getSelectedItem().toString().equals(arraySpinner[0])) {
+                    findViewById(R.id.card1).setVisibility(View.VISIBLE);
                     SERVER_IP = "192.168.113.60";
                 }
-                else if(cardTypeSpinner.getSelectedItem().toString().equals(arraySpinner[1]))
+                else if(cardTypeSpinner.getSelectedItem().toString().equals(arraySpinner[1])){
                     SERVER_IP="192.168.113.74";
+                    findViewById(R.id.card2).setVisibility(View.VISIBLE);
+                }
+
                 Thread1 = new Thread(new ConnectingThread());
                 Thread1.start();
-
-//                new Thread(new WriteMessageToOutputStream("0067305985")).start();
 
             }
         });
@@ -102,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         tvMessages.setText("Connected\n");
                     }
                 });
-                output.writeUTF("0067305985");
+                output.writeUTF("2737591102<EOF>");
                 output.flush();
 
                 socket.close();

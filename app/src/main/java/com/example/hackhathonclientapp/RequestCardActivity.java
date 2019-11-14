@@ -41,7 +41,7 @@ public class RequestCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_card);
 
-        cardTypeSpinner = (Spinner) findViewById(R.id.cardTypeSpinner);
+        //cardTypeSpinner = (Spinner) findViewById(R.id.cardTypeSpinner);
         addButton = (Button) findViewById(R.id.btnAddCard);
         connectivityTextView = (TextView) findViewById(R.id.connectivityTextView);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
