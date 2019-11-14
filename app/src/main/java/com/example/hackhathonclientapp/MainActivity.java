@@ -33,20 +33,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        etIP = findViewById(R.id.etIP);
-        etPort = findViewById(R.id.etPort);
-        tvMessages = findViewById(R.id.tvMessages);
-        etMessage = findViewById(R.id.etMessage);
-        btnSend = findViewById(R.id.btnSend);
-        Button btnConnect = findViewById(R.id.btnConnect);
+
+        Button btnConnect = findViewById(R.id.btnAddCard);
         btnConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tvMessages.setText("");
-                SERVER_IP = SERVER_IP;
-                SERVER_PORT = SERVER_PORT;
-                Thread1 = new Thread(new ConnectingThread());
-                Thread1.start();
             }
         });
         btnSend.setOnClickListener(new View.OnClickListener() {
