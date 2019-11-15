@@ -13,6 +13,30 @@
     android:orientation="vertical"
     tools:context="com.example.hackhathonclientapp.RequestCardActivity">
 
+<!--    <TextView
+        android:id="@+id/nfcText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:textSize="16dp"
+        android:padding="10dp"
+        android:text="" android:textAlignment="center"
+        android:visibility="invisible"/>-->
+
+    <Button
+        android:id="@+id/readNFCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true"
+        android:text="Read NFC Card"
+        android:onClick="ReadNFC"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
     <TextView
         android:id="@+id/connectivityTextView"
         android:layout_width="match_parent"
@@ -32,6 +56,7 @@
         android:layout_height="wrap_content"
         android:padding="7dp"
         android:layout_margin="10dp"
+        android:text="192.168.113.74"
         android:background="@android:color/darker_gray"/>
     <TextView
         android:id="@+id/port"
@@ -47,6 +72,7 @@
         android:layout_height="wrap_content"
         android:padding="7dp"
         android:layout_margin="10dp"
+        android:text="7000"
         android:background="@android:color/darker_gray"/>
     <Button
         android:id="@+id/btnAddCard"
@@ -56,5 +82,6 @@
         android:layout_margin="5dp"
         android:layout_alignParentBottom="true"
         android:text="Request Card" />
+
 </LinearLayout>
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.hackhathonclientapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -62,7 +63,32 @@ public class RequestCardActivity extends AppCompatActivity {
     Socket socket;
     TextView tvMessages;
 
+    public void ReadNFC(View view) {
+        /*TextView tv = findViewById(R.id.nfcText);
+        tv.setText("Place your NFC Card behind the device");
+        tv.setVisibility(View.VISIBLE);*/
+        NfcAdapter nfc = NfcAdapter.getDefaultAdapter(this);
+        NFCCardReader nfcReader = new NFCCardReader();
+        if (nfc != null) {
+            nfc.enableReaderMode(this, nfcReader, NfcAdapter.FLAG_READER_NFC_A | NfcAdapter.FLAG_READER_SKIP_NDEF_CHECK | NfcAdapter.FLAG_READER_NFC_B, null);
+        }
+
+        Thread thread = new Thread(){
+            public void run(){
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast toast = Toast.makeText(RequestCardActivity.this, "Place your NFC Card behind the device", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        toast.show();
+                    }
+                });
+            }
+        };
+        thread.start();
+    }
+
     class ConnectingThread implements Runnable {
+
         @Override
         public void run() {
 
@@ -70,8 +96,8 @@ public class RequestCardActivity extends AppCompatActivity {
                 socket = new Socket(SERVER_IP, SERVER_PORT);
                 output = new DataOutputStream(socket.getOutputStream());
                 input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-                output.writeUTF("2737591102<EOF>");
+                String strToSendServer = NFCCardReader.tagID + "~0067305985" +"<EOF>";
+                output.writeUTF(strToSendServer);
                 String messageReceived = input.readLine();
 
                 if(messageReceived.startsWith("TRUE"))
@@ -98,7 +124,9 @@ public class RequestCardActivity extends AppCompatActivity {
                 socket.shutdownInput();
                 socket.shutdownOutput();
                 socket.close();
-                finish();
+                //finish();
+                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(myIntent);
 
             } catch (IOException e) {
                 e.printStackTrace();

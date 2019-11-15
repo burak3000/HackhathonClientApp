@@ -2,6 +2,7 @@ package com.example.hackhathonclientapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<Card> adapter = new ArrayAdapter<Card>(this, android.R.layout.simple_list_item_1, android.R.id.text1, Card.CardList);
         CardListView.setAdapter(adapter);
     }
+
 
     public void RequestOnClick(View view) {
         Intent myIntent = new Intent(this, RequestCardActivity.class);
