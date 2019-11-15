@@ -7,27 +7,35 @@
     android:orientation="vertical"
     tools:context="com.example.hackhathonclientapp.RequestCardActivity">
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btnConnectToServer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connect to Server" />
     <TextView
         android:id="@+id/connectivityTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
-
+    <TextView
+        android:id="@+id/tvIp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Server IP Address" />
+    <EditText
+        android:id="@+id/etIp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_dark_background"/>
+    <TextView
+        android:id="@+id/port"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Port" />
+    <EditText
+        android:id="@+id/etPort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_dark_background"/>
     <Button
         android:id="@+id/btnAddCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="RequestAddCard"
-        android:text="Add Card" />
-
-
+        android:onClick="SendRequestToServer"
+        android:text="Request Card" />
 </LinearLayout>

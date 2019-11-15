@@ -2,16 +2,20 @@ package com.example.hackhathonclientapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.client.myapplication.client.R;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -22,14 +26,12 @@ public class RequestCardActivity extends AppCompatActivity {
 
     Spinner cardTypeSpinner;
     Button addButton;
-    String[] arraySpinner = new String[]{
-            "MainEntranceCard", "ShuttleCard", "InvalidCard"
-    };
+    EditText etIp;
+    EditText etPort;
     Thread connectToServerThread;
     String SERVER_IP;
     int SERVER_PORT;
-    private PrintWriter output;
-    private BufferedReader input;
+
     TextView connectivityTextView;
     Thread Thread1;
     Thread Thread2;
@@ -41,34 +43,55 @@ public class RequestCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_card);
 
-        //cardTypeSpinner = (Spinner) findViewById(R.id.cardTypeSpinner);
         addButton = (Button) findViewById(R.id.btnAddCard);
-        connectivityTextView = (TextView) findViewById(R.id.connectivityTextView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, arraySpinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cardTypeSpinner.setAdapter(adapter);
+        etIp = (EditText) findViewById(R.id.etIp);
+        etPort = (EditText) findViewById(R.id.etPort);
     }
 
-//    public void RequestAddCard(View view) {
-//        String selectedCardType = cardTypeSpinner.getSelectedItem().toString();
-//        DispatchRequestToServer(selectedCardType);
-//    }
-//
-//    public void DispatchRequestToServer(String selectedCardType) {
-//        if (selectedCardType.equals(arraySpinner[0]))
-//            sendRequestToMainEntranceServer(new Card(UUID.randomUUID().toString(), "MainEntranceCard"));
-//
-//    }
-//
-//    private void sendRequestToMainEntranceServer(Card mainEntranceCard) {
-//        SERVER_IP = "192.168.113.60";
-//        SERVER_PORT = 25000;
-//        new Thread(new WriteMessageToOutputStream("MainEntrance")).start();
-//    }
-//
-//    public void ConnectToServer(View view) {
-//
-//    }
+    public void SendRequestToServer(View view) {
+        SERVER_IP = etIp.getText().toString();
+        SERVER_PORT= Integer.parseInt(etPort.getText().toString());
 
+        Thread1 = new Thread(new ConnectingThread());
+        Thread1.start();
+    }
+
+    private DataOutputStream output;
+    private BufferedReader input;
+    Socket socket;
+    TextView tvMessages;
+
+    class ConnectingThread implements Runnable {
+        @Override
+        public void run() {
+
+            try {
+                socket = new Socket(SERVER_IP, SERVER_PORT);
+                output = new DataOutputStream(socket.getOutputStream());
+                input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+                output.writeUTF("2737591102<EOF>");
+                String messageReceived = input.readLine();
+
+                if(messageReceived.startsWith("TRUE"))
+                {
+                    String[] cardType = messageReceived.split("~");
+                    Card newCard = new Card(cardType[1]);
+                    Card.CardList.add(newCard);
+
+                    //Toast.makeText(RequestCardActivity.this, "Card Added Successfully!", Toast.LENGTH_LONG).show();
+            }
+
+                output.flush();
+                socket.shutdownInput();
+                socket.shutdownOutput();
+                socket.close();
+                finish();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
+
