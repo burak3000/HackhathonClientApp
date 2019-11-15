@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dip"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -16,26 +22,39 @@
         android:id="@+id/tvIp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:padding="10dp"
+        android:textSize="16dp"
         android:text="Server IP Address" />
     <EditText
         android:id="@+id/etIp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cardview_dark_background"/>
+        android:padding="7dp"
+        android:layout_margin="10dp"
+        android:background="@android:color/darker_gray"/>
     <TextView
         android:id="@+id/port"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:textSize="16dp"
+        android:padding="10dp"
         android:text="Port" />
     <EditText
         android:id="@+id/etPort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cardview_dark_background"/>
+        android:padding="7dp"
+        android:layout_margin="10dp"
+        android:background="@android:color/darker_gray"/>
     <Button
         android:id="@+id/btnAddCard"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="SendRequestToServer"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
         android:text="Request Card" />
 </LinearLayout>
+</RelativeLayout>

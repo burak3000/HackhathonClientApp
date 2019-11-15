@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -79,7 +80,18 @@ public class RequestCardActivity extends AppCompatActivity {
                     Card newCard = new Card(cardType[1]);
                     Card.CardList.add(newCard);
 
-                    //Toast.makeText(RequestCardActivity.this, "Card Added Successfully!", Toast.LENGTH_LONG).show();
+                    Thread thread = new Thread(){
+                        public void run(){
+                            runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Toast toast = Toast.makeText(RequestCardActivity.this, "Card Added Successfully!", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                    toast.show();
+                                }
+                            });
+                        }
+                    };
+                    thread.start();
             }
 
                 output.flush();
